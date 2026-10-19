@@ -1,0 +1,53 @@
+/* Suggest a place page — NearHelp */
+
+body:has(#add-place-form) {
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 12% 15%, #a9eee0 0, transparent 34%),
+    radial-gradient(ellipse at 88% 25%, #d9d5ff 0, transparent 32%),
+    linear-gradient(145deg, #f0fffb, #f6f5ff 55%, #fff8f1);
+}
+
+body:has(#add-place-form) .container {
+  width: min(100% - 32px, 760px);
+  margin: 48px auto;
+}
+
+body:has(#add-place-form) .auth-card {
+  padding: clamp(24px, 5vw, 46px);
+  background: rgb(255 255 255 / 74%);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+body:has(#add-place-form) #add-place-form {
+  display: grid;
+  gap: 10px;
+}
+
+body:has(#add-place-form) #add-place-form label {
+  margin-top: 8px;
+}
+
+body:has(#add-place-form) #get-location-button {
+  color: var(--brand-600);
+  border: 1px solid var(--line-strong);
+  background: rgb(255 255 255 / 70%);
+  box-shadow: none;
+}
+
+body:has(#add-place-form) #get-location-button:hover {
+  background: var(--brand-50);
+}
+
+@media (max-width: 560px) {
+  body:has(#add-place-form) .container {
+    width: min(100% - 20px, 760px);
+    margin: 24px auto;
+  }
+
+  body:has(#add-place-form) .auth-card {
+    padding: 22px 18px;
+    border-radius: 22px;
+  }
+}

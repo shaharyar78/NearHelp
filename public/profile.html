@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Apni NearHelp profile dekhein aur update karein."
+    />
+    <title>My Profile — NearHelp</title>
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/profile.css" />
+    <script type="module" src="/js/auth.js"></script>
+  </head>
+
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="NearHelp home">
+        <img src="/assets/logo.svg" alt="" width="36" height="36" />
+        <span>NearHelp</span>
+      </a>
+
+      <nav aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/chat.html">Chat</a>
+        <a href="/admin.html" data-require-admin>Admin dashboard</a>
+        <button id="logout-button" type="button">Logout</button>
+      </nav>
+    </header>
+
+    <main class="container profile-container">
+      <section class="profile-card" aria-labelledby="profile-heading">
+        <span class="profile-eyebrow">Your NearHelp account</span>
+        <h1 id="profile-heading">My Profile</h1>
+        <p class="profile-intro">Review and update your account details.</p>
+
+        <p id="profile-status" role="status" aria-live="polite">
+          Loading your profile…
+        </p>
+
+        <form id="profile-form" hidden>
+          <div class="profile-readonly">
+            <div>
+              <span class="field-caption">Name</span>
+              <strong id="profile-name"></strong>
+            </div>
+            <div>
+              <span class="field-caption">Email</span>
+              <strong id="profile-email"></strong>
+            </div>
+          </div>
+
+          <label for="gender">Gender <span>(optional)</span></label>
+          <select id="gender" name="gender">
+          <option value="">Select an option</option>
+            <option value="Woman">Woman</option>
+            <option value="Man">Man</option>
+            <option value="Non-binary">Non-binary</option>
+            <option value="Prefer not to say">Prefer not to say</option>
+          </select>
+
+          <label for="location">Location <span>(city/area)</span></label>
+          <input
+            id="location"
+            name="location"
+            type="text"
+            maxlength="120"
+            placeholder="Jaise: Noida, Uttar Pradesh"
+            autocomplete="address-level2"
+          />
+
+          <label for="work">Work or occupation <span>(optional)</span></label>
+          <input
+            id="work"
+            name="work"
+            type="text"
+            maxlength="120"
+            placeholder="Jaise: Student, Designer"
+            autocomplete="organization-title"
+          />
+
+          <button class="button button-primary button-block profile-save" type="submit">Save profile</button>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

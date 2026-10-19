@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="NearHelp community chat mein sabse baat karein."
+    />
+    <title>Community Chat — NearHelp</title>
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/chat.css" />
+    <script type="module" src="/js/chat.js"></script>
+  </head>
+
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="NearHelp home">
+        <img src="/assets/logo.svg" alt="" width="36" height="36" />
+        <span>NearHelp</span>
+      </a>
+
+      <nav aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/profile.html">Profile</a>
+        <button id="logout-button" type="button">Logout</button>
+      </nav>
+    </header>
+
+    <main class="container public-chat-layout">
+      <section class="messages-panel" aria-labelledby="messages-heading">
+        <p class="chat-room-label">NearHelp community</p>
+        <h1 id="messages-heading">Community chat</h1>
+        <p class="chat-room-description">
+          Messages are visible to everyone in the community.
+        </p>
+
+        <p id="message-status" role="status" aria-live="polite">
+          Loading messages…
+        </p>
+
+        <ol id="message-list" class="message-list"></ol>
+
+        <form id="message-form" hidden>
+          <label for="message-input">Write a message</label>
+          <textarea
+            id="message-input"
+            name="body"
+            rows="3"
+            maxlength="2000"
+            placeholder="Write a message…"
+            required
+          ></textarea>
+          <button class="button button-primary" type="submit">Send message</button>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

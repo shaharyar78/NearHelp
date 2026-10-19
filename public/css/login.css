@@ -1,0 +1,30 @@
+/* Login page — NearHelp */
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 12% 18%, rgb(149 232 212 / 40%), transparent 36%),
+    radial-gradient(ellipse at 90% 24%, rgb(165 165 255 / 32%), transparent 34%),
+    linear-gradient(135deg, #eafbf5, #f3f1ff 58%, #fff4eb);
+}
+
+.site-header {
+  background: rgb(255 255 255 / 62%);
+}
+
+.auth-card {
+  background: rgb(255 255 255 / 78%);
+  backdrop-filter: blur(18px) saturate(150%);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+}
+
+@media (max-width: 520px) {
+  .auth-container {
+    min-height: calc(100vh - 90px);
+    padding-block: 28px;
+  }
+
+  .auth-card {
+    border-radius: 22px;
+  }
+}

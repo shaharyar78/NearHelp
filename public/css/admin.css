@@ -1,0 +1,74 @@
+/* Admin dashboard page — NearHelp */
+
+.admin-page {
+  background:
+    radial-gradient(ellipse at 10% 8%, #c4f3e8 0, transparent 32%),
+    radial-gradient(ellipse at 90% 14%, #e2ddff 0, transparent 30%),
+    #f4f8f7;
+}
+
+.admin-page .site-header {
+  background: rgb(255 255 255 / 78%);
+}
+
+.admin-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.stat-card {
+  padding: 20px 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+}
+
+.stat-card .stat-label {
+  display: block;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.stat-card .stat-value {
+  display: block;
+  margin-top: 8px;
+  color: var(--ink);
+  font-size: 2.1rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.review-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.admin-page select {
+  min-height: 40px;
+  padding: 7px 10px;
+  border-radius: var(--radius-sm);
+}
+
+@media (max-width: 640px) {
+  .admin-container {
+    width: min(100% - 20px, 1180px);
+    padding-block: 24px;
+  }
+
+  .admin-panel {
+    padding: 18px 14px;
+    border-radius: 18px;
+  }
+
+  th,
+  td {
+    padding: 11px 12px;
+  }
+}

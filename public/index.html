@@ -1,0 +1,1009 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Find nearby community places and suggest missing locations with NearHelp."
+    />
+    <meta name="theme-color" content="#087f70" />
+    <title>NearHelp — Local help, close to home</title>
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/index.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+  </head>
+
+  <body class="home-page">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header class="site-header" id="top">
+      <div class="header-inner">
+        <a class="brand" href="/" aria-label="NearHelp home">
+          <img src="/assets/logo.svg" alt="" width="48" height="48" />
+          <span>NearHelp</span>
+        </a>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section class="hero-section" aria-labelledby="hero-heading">
+        <div class="hero-copy">
+          <p class="eyebrow">Here for your community</p>
+          <p class="hero-overline">LOCAL INFORMATION, MADE EASIER</p>
+
+          <h1 id="hero-heading">
+            Find the help you need,
+            <span>right around you.</span>
+          </h1>
+
+          <p class="hero-description">
+            Explore useful places in your neighbourhood, from schools and
+            hospitals to pharmacies, banks, and public services.
+          </p>
+
+          <p class="hero-description">
+            Search nearby places, view them on a map, and suggest places that
+            are missing from the available map data.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button button-primary" href="#nearby-search">
+              Explore nearby
+            </a>
+            <a class="button button-secondary" href="/add-place.html">
+              Suggest a place
+            </a>
+          </div>
+
+          <p class="hero-privacy-note">
+            Your browser asks for permission before sharing your location.
+          </p>
+
+          <ul class="hero-highlights">
+            <li>
+              <strong>Search</strong>
+              <span>Choose a place category</span>
+            </li>
+            <li>
+              <strong>Explore</strong>
+              <span>See available results on a map</span>
+            </li>
+            <li>
+              <strong>Contribute</strong>
+              <span>Suggest a place for review</span>
+            </li>
+          </ul>
+        </div>
+
+        <div
+          class="hero-visual"
+          role="img"
+          aria-label="Illustrated neighbourhood map with nearby community places"
+        >
+          <div class="hero-map-card">
+            <div class="hero-map-heading">
+              <span class="map-status-dot" aria-hidden="true"></span>
+              <span>Explore your neighbourhood</span>
+            </div>
+
+            <div class="hero-map-art">
+              <svg
+                viewBox="0 0 640 480"
+                aria-hidden="true"
+                focusable="false"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect
+                  x="18"
+                  y="18"
+                  width="604"
+                  height="444"
+                  rx="34"
+                  fill="#edf2e8"
+                />
+                <path d="M28 112H610" stroke="#fff" stroke-width="22" />
+                <path d="M28 225H610" stroke="#fff" stroke-width="20" />
+                <path d="M28 345H610" stroke="#fff" stroke-width="24" />
+                <path d="M160 24V454" stroke="#fff" stroke-width="19" />
+                <path d="M320 24V454" stroke="#fff" stroke-width="22" />
+                <path d="M488 24V454" stroke="#fff" stroke-width="18" />
+
+                <path
+                  d="M46 398L180 266L297 298L456 122L600 72"
+                  fill="none"
+                  stroke="#f2d36d"
+                  stroke-width="17"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M28 296C152 286 200 327 292 313C405 296 479 346 611 333"
+                  fill="none"
+                  stroke="#9bd6d7"
+                  stroke-width="18"
+                  stroke-linecap="round"
+                />
+
+                <rect x="48" y="62" width="70" height="33" fill="#d7edcf" />
+                <rect x="345" y="358" width="65" height="62" fill="#d7edcf" />
+                <rect x="516" y="244" width="74" height="63" fill="#d7edcf" />
+
+                <g transform="translate(56 138)">
+                  <rect width="150" height="50" rx="16" fill="#fff" />
+                  <text
+                    x="18"
+                    y="32"
+                    fill="#e45f4f"
+                    font-size="23"
+                    font-family="Arial, sans-serif"
+                    font-weight="700"
+                  >+</text>
+                  <text
+                    x="48"
+                    y="31"
+                    fill="#254c45"
+                    font-size="16"
+                    font-family="Arial, sans-serif"
+                    font-weight="700"
+                  >Hospital</text>
+                </g>
+
+                <g transform="translate(390 154)">
+                  <rect width="132" height="50" rx="16" fill="#fff" />
+                  <text
+                    x="17"
+                    y="32"
+                    fill="#8170cf"
+                    font-size="22"
+                    font-family="Arial, sans-serif"
+                    font-weight="700"
+                  >H</text>
+                  <text
+                    x="48"
+                    y="31"
+                    fill="#254c45"
+                    font-size="16"
+                    font-family="Arial, sans-serif"
+                    font-weight="700"
+                  >School</text>
+                </g>
+
+                <g transform="translate(215 355)">
+                  <rect width="152" height="50" rx="16" fill="#fff" />
+                  <text
+                    x="18"
+                    y="32"
+                    fill="#0b967e"
+                    font-size="23"
+                    font-family="Arial, sans-serif"
+                    font-weight="700"
+                  >+</text>
+                  <text
+                    x="48"
+                    y="31"
+                    fill="#254c45"
+                    font-size="16"
+                    font-family="Arial, sans-serif"
+                    font-weight="700"
+                  >Pharmacy</text>
+                </g>
+
+                <circle cx="322" cy="239" r="48" fill="#078b78" opacity=".16" />
+                <circle
+                  cx="322"
+                  cy="239"
+                  r="27"
+                  fill="#078b78"
+                  stroke="#fff"
+                  stroke-width="9"
+                />
+                <circle cx="322" cy="239" r="7" fill="#fff" />
+              </svg>
+            </div>
+
+            <div class="hero-map-caption">
+              <span>Places to help you get started</span>
+              <a href="#nearby-search">Open search</a>
+            </div>
+          </div>
+
+          <div class="floating-information-card">
+            <strong>Missing a local place?</strong>
+            <span>Suggest it for review</span>
+            <a href="/add-place.html">Suggest a place</a>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="introduction-section"
+        id="about"
+        aria-labelledby="introduction-heading"
+      >
+        <div class="section-heading">
+          <p class="eyebrow">A local guide for everyone</p>
+          <h2 id="introduction-heading">
+            The places that matter,
+            <span>closer to you.</span>
+          </h2>
+        </div>
+
+        <div class="introduction-content">
+          <p>
+            Finding a useful local service should not feel difficult. NearHelp
+            brings nearby places together so you can search by category and
+            explore available results in one place.
+          </p>
+          <p>
+            Whether you are new to an area, looking for an essential service,
+            or helping someone else, NearHelp is designed to make local
+            information easier to explore.
+          </p>
+          <p>
+            NearHelp uses available map data. Some places may not appear until
+            they are added to the map data or suggested by the community.
+          </p>
+          <p>
+            If a useful place is missing, you can submit its details for
+            review. Approved suggestions can help make the directory more
+            useful.
+          </p>
+        </div>
+      </section>
+
+      <section
+        id="explore"
+        class="explore-section"
+        aria-labelledby="explore-heading"
+      >
+        <div class="section-heading">
+          <p class="eyebrow">Explore nearby</p>
+          <h2 id="explore-heading">Find useful places around you</h2>
+          <p>
+            Choose a category and allow location access to search nearby.
+            Results depend on the map data available for your area.
+          </p>
+        </div>
+
+        <div class="category-grid" aria-label="Place categories">
+          <a class="category-card" href="#nearby-search">
+            <span class="category-icon" aria-hidden="true">+</span>
+            <span class="category-name">Hospitals and clinics</span>
+            <span class="category-description">
+              Find mapped healthcare facilities.
+            </span>
+          </a>
+
+          <a class="category-card" href="#nearby-search">
+            <span class="category-icon" aria-hidden="true">+</span>
+            <span class="category-name">Pharmacies</span>
+            <span class="category-description">
+              Look for pharmacies in your area.
+            </span>
+          </a>
+
+          <a class="category-card" href="#nearby-search">
+            <span class="category-icon" aria-hidden="true">!</span>
+            <span class="category-name">Police stations</span>
+            <span class="category-description">
+              Search for mapped police services.
+            </span>
+          </a>
+
+          <a class="category-card" href="#nearby-search">
+            <span class="category-icon" aria-hidden="true">!</span>
+            <span class="category-name">Fire stations</span>
+            <span class="category-description">
+              Find mapped fire and rescue services.
+            </span>
+          </a>
+
+          <a class="category-card" href="#nearby-search">
+            <span class="category-icon" aria-hidden="true">⌂</span>
+            <span class="category-name">Shelters</span>
+            <span class="category-description">
+              Search for mapped shelters and support facilities.
+            </span>
+          </a>
+
+          <a class="category-card" href="#nearby-search">
+            <span class="category-icon" aria-hidden="true">●</span>
+            <span class="category-name">Food and cafes</span>
+            <span class="category-description">
+              Browse restaurants, cafes, and food places.
+            </span>
+          </a>
+
+          <a class="category-card" href="#nearby-search">
+            <span class="category-icon" aria-hidden="true">▣</span>
+            <span class="category-name">Shops</span>
+            <span class="category-description">
+              Find shops listed in the map data.
+            </span>
+          </a>
+
+          <a class="category-card" href="#nearby-search">
+            <span class="category-icon" aria-hidden="true">▦</span>
+            <span class="category-name">Schools</span>
+            <span class="category-description">
+              Search for schools near your location.
+            </span>
+          </a>
+
+          <a class="category-card" href="#nearby-search">
+            <span class="category-icon" aria-hidden="true">▤</span>
+            <span class="category-name">Colleges</span>
+            <span class="category-description">
+              Look for colleges and universities.
+            </span>
+          </a>
+
+          <a class="category-card" href="#nearby-search">
+            <span class="category-icon" aria-hidden="true">▥</span>
+            <span class="category-name">Libraries</span>
+            <span class="category-description">
+              Find libraries and learning spaces.
+            </span>
+          </a>
+
+          <a class="category-card" href="#nearby-search">
+            <span class="category-icon" aria-hidden="true">₹</span>
+            <span class="category-name">Banks</span>
+            <span class="category-description">
+              Search for mapped bank branches.
+            </span>
+          </a>
+
+          <a class="category-card" href="#nearby-search">
+            <span class="category-icon" aria-hidden="true">₹</span>
+            <span class="category-name">ATMs</span>
+            <span class="category-description">
+              Look for ATMs listed in map data.
+            </span>
+          </a>
+
+          <a class="category-card" href="#nearby-search">
+            <span class="category-icon" aria-hidden="true">P</span>
+            <span class="category-name">Parking</span>
+            <span class="category-description">
+              Find mapped parking areas.
+            </span>
+          </a>
+
+          <a class="category-card" href="#nearby-search">
+            <span class="category-icon" aria-hidden="true">⌖</span>
+            <span class="category-name">All categories</span>
+            <span class="category-description">
+              Search across supported categories.
+            </span>
+          </a>
+        </div>
+      </section>
+
+      <section
+        id="nearby-search"
+        class="nearby-search-section"
+        aria-labelledby="search-heading"
+      >
+        <div class="section-heading">
+          <p class="eyebrow">Nearby search</p>
+          <h2 id="search-heading">Search places around your location</h2>
+          <p>
+            Choose a place type and select “Search near me”. Your browser will
+            ask permission to use your location.
+          </p>
+        </div>
+
+        <div class="search-panel">
+          <form id="place-search-form" class="search-form">
+            <label for="category">Choose a place category</label>
+            <select id="category" name="category">
+              <option value="">All supported categories</option>
+              <option value="hospital">Hospital or clinic</option>
+              <option value="pharmacy">Pharmacy</option>
+              <option value="police">Police station</option>
+              <option value="fire_station">Fire station</option>
+              <option value="shelter">Shelter</option>
+              <option value="food">Food and cafes</option>
+              <option value="shop">Shop</option>
+              <option value="school">School</option>
+              <option value="college">College or university</option>
+              <option value="library">Library</option>
+              <option value="bank">Bank</option>
+              <option value="atm">ATM</option>
+              <option value="parking">Parking</option>
+            </select>
+            <button type="submit">Search near me</button>
+          </form>
+
+          <p id="search-status" role="status" aria-live="polite">
+            Choose a category and start a nearby search.
+          </p>
+
+          <div
+            id="map"
+            class="map"
+            role="region"
+            aria-label="Map showing nearby places"
+          ></div>
+
+          <div class="results-panel">
+            <h3>Search results</h3>
+            <p>Select a result to open its details page.</p>
+            <ul id="place-results" class="place-results"></ul>
+          </div>
+        </div>
+
+        <div class="search-notes">
+          <article class="note-card">
+            <h3>Location permission</h3>
+            <p>
+              Nearby search needs your browser's location permission. You can
+              manage permission in your browser settings.
+            </p>
+          </article>
+          <article class="note-card">
+            <h3>Map coverage</h3>
+            <p>
+              Some towns and villages may have missing or outdated map
+              listings.
+            </p>
+          </article>
+          <article class="note-card">
+            <h3>Something missing?</h3>
+            <p>
+              Suggest a place that is not currently shown in search results.
+            </p>
+            <a href="/add-place.html">Suggest a place</a>
+          </article>
+        </div>
+      </section>
+          <section
+        id="how-it-works"
+        class="how-it-works-section"
+        aria-labelledby="how-heading"
+      >
+        <div class="section-heading">
+          <p class="eyebrow">How NearHelp works</p>
+          <h2 id="how-heading">A simple way to find local information</h2>
+          <p>
+            Search for places, review available details, or suggest a missing
+            location for review.
+          </p>
+        </div>
+
+        <ol class="steps-list">
+          <li class="step-card">
+            <span class="step-number">01</span>
+            <h3>Choose what you need</h3>
+            <p>
+              Select a category such as a hospital, pharmacy, school, or bank.
+            </p>
+          </li>
+          <li class="step-card">
+            <span class="step-number">02</span>
+            <h3>Share your location</h3>
+            <p>
+              Allow location access when your browser asks. NearHelp uses it to
+              search nearby.
+            </p>
+          </li>
+          <li class="step-card">
+            <span class="step-number">03</span>
+            <h3>Review the results</h3>
+            <p>
+              See available places on the map and in the results list.
+            </p>
+          </li>
+          <li class="step-card">
+            <span class="step-number">04</span>
+            <h3>Suggest missing places</h3>
+            <p>
+              Sign in and submit useful local places for administrator review.
+            </p>
+          </li>
+        </ol>
+      </section>
+
+      <section
+        id="emergency"
+        class="emergency-section"
+        aria-labelledby="emergency-heading"
+      >
+        <div class="emergency-panel">
+          <div class="emergency-copy">
+            <p class="eyebrow">Emergency information</p>
+            <h2 id="emergency-heading">
+              For immediate danger, contact local services
+            </h2>
+            <p>
+              NearHelp can help search mapped services. It is not an emergency
+              dispatch service and does not contact responders for you.
+            </p>
+            <p>
+              If someone is in immediate danger, contact the official emergency
+              services for your location directly.
+            </p>
+            <a href="#nearby-search">Search nearby services</a>
+          </div>
+
+          <div class="emergency-list" aria-label="Emergency search options">
+            <a href="#nearby-search">Search for a hospital</a>
+            <a href="#nearby-search">Search for a police station</a>
+            <a href="#nearby-search">Search for a fire station</a>
+            <a href="#nearby-search">Search for a pharmacy</a>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="suggest-a-place"
+        class="community-section"
+        aria-labelledby="community-heading"
+      >
+        <div class="section-heading">
+          <p class="eyebrow">Community suggestions</p>
+          <h2 id="community-heading">Help add places that are missing</h2>
+          <p>
+            Local knowledge can help people find useful places that may not
+            appear in map search.
+          </p>
+        </div>
+
+        <div class="community-layout">
+          <div class="community-copy">
+            <h3>Know a nearby place?</h3>
+            <p>
+              Sign in to suggest a hospital, school, pharmacy, community
+              facility, or another useful location.
+            </p>
+            <p>
+              Suggestions are sent for review and are not immediately added to
+              public search results.
+            </p>
+            <a class="button-link" href="/add-place.html">
+              Suggest a place
+            </a>
+          </div>
+
+          <div class="community-steps">
+            <article class="community-step">
+              <span class="step-number">01</span>
+              <div>
+                <h3>Share the details</h3>
+                <p>
+                  Enter the name, category, address, and location as accurately
+                  as possible.
+                </p>
+              </div>
+            </article>
+
+            <article class="community-step">
+              <span class="step-number">02</span>
+              <div>
+                <h3>Wait for review</h3>
+                <p>
+                  An administrator checks the suggestion before making a
+                  decision.
+                </p>
+              </div>
+            </article>
+
+            <article class="community-step">
+              <span class="step-number">03</span>
+              <div>
+                <h3>Keep information accurate</h3>
+                <p>
+                  Submit places that are useful to the community and provide
+                  correct details.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="account"
+        class="account-section"
+        aria-labelledby="account-heading"
+      >
+        <div class="section-heading">
+          <p class="eyebrow">Your NearHelp account</p>
+          <h2 id="account-heading">Tools for signed-in members</h2>
+          <p>
+            Create an account to manage your profile, send messages, and
+            suggest places for review.
+          </p>
+        </div>
+
+        <div class="account-grid">
+          <article class="account-card">
+            <span class="account-icon" aria-hidden="true">01</span>
+            <h3>Manage your profile</h3>
+            <p>
+              View your account details and update optional profile
+              information.
+            </p>
+            <a href="/profile.html">Open profile</a>
+          </article>
+
+          <article class="account-card">
+            <span class="account-icon" aria-hidden="true">02</span>
+            <h3>Send messages</h3>
+            <p>
+              Use NearHelp conversations to communicate with registered
+              members.
+            </p>
+            <a href="/chat.html">Open chat</a>
+          </article>
+
+          <article class="account-card">
+            <span class="account-icon" aria-hidden="true">03</span>
+            <h3>Suggest a place</h3>
+            <p>
+              Share a missing place with the NearHelp team for review.
+            </p>
+            <a href="/add-place.html">Submit a suggestion</a>
+          </article>
+
+          <article class="account-card">
+            <span class="account-icon" aria-hidden="true">04</span>
+            <h3>Join NearHelp</h3>
+            <p>
+              Sign up to access the member features available on the website.
+            </p>
+            <a href="/signup.html">Create an account</a>
+          </article>
+        </div>
+      </section>
+
+      <section
+        id="safety"
+        class="safety-section"
+        aria-labelledby="safety-heading"
+      >
+        <div class="section-heading">
+          <p class="eyebrow">Use information carefully</p>
+          <h2 id="safety-heading">A few things to keep in mind</h2>
+          <p>
+            NearHelp helps you explore place information. Use your own judgment
+            when making decisions.
+          </p>
+        </div>
+
+        <div class="safety-grid">
+          <article class="safety-card">
+            <h3>Check important details</h3>
+            <p>
+              Names, addresses, opening hours, and availability can change.
+              Contact a place directly when you need confirmation.
+            </p>
+          </article>
+
+          <article class="safety-card">
+            <h3>Map results may be incomplete</h3>
+            <p>
+              A place may exist but not appear if it is missing from the
+              geographic map data.
+            </p>
+          </article>
+
+          <article class="safety-card">
+            <h3>Location access is optional</h3>
+            <p>
+              You can decline the browser location request. Nearby search needs
+              coordinates to find places around you.
+            </p>
+          </article>
+
+          <article class="safety-card">
+            <h3>Protect your account</h3>
+            <p>
+              Keep your password private and sign out when using a shared
+              device.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section
+        id="accessibility"
+        class="accessibility-section"
+        aria-labelledby="accessibility-heading"
+      >
+        <div class="section-heading">
+          <p class="eyebrow">Designed to be easier to use</p>
+          <h2 id="accessibility-heading">
+            Clear information and simple navigation
+          </h2>
+          <p>
+            NearHelp uses labelled controls, named sections, and text status
+            messages to make the site easier to navigate.
+          </p>
+        </div>
+
+        <div class="accessibility-grid">
+          <article class="accessibility-card">
+            <h3>Keyboard navigation</h3>
+            <p>Use your keyboard to reach links, buttons, and form controls.</p>
+          </article>
+          <article class="accessibility-card">
+            <h3>Form labels</h3>
+            <p>Labels explain the purpose of search and account fields.</p>
+          </article>
+          <article class="accessibility-card">
+            <h3>Status updates</h3>
+            <p>
+              Search messages can announce loading and error information.
+            </p>
+          </article>
+          <article class="accessibility-card">
+            <h3>Responsive structure</h3>
+            <p>
+              Sections and content are organized for different screen sizes.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="faq" class="faq-section" aria-labelledby="faq-heading">
+        <div class="section-heading">
+          <p class="eyebrow">Frequently asked questions</p>
+          <h2 id="faq-heading">Common questions about NearHelp</h2>
+        </div>
+
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>Why are no places appearing near me?</summary>
+            <p>
+              Check that location access is allowed and the correct category is
+              selected. Map data may be incomplete in your area. You can
+              suggest a missing place for review.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Is every listing guaranteed to be current?</summary>
+            <p>
+              No. Place information can change, and map data may be incomplete
+              or out of date. Confirm important details directly with the
+              place.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Do I need an account to search for places?</summary>
+            <p>
+              Nearby search is available from this page. An account is needed
+              for features such as messaging and suggesting places.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Why does my browser ask for location permission?</summary>
+            <p>
+              Nearby search uses your coordinates to look for places around
+              you. You can decline the request in your browser.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Can I add a place that is missing?</summary>
+            <p>
+              Yes. Sign in and use the Suggest a place form. Your submission
+              will be reviewed before it is approved.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Does NearHelp contact emergency services?</summary>
+            <p>
+              No. NearHelp does not dispatch emergency responders. Contact your
+              local emergency services directly if you need urgent help.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>How do I update my profile?</summary>
+            <p>
+              Sign in, open your profile, edit the available details, and save
+              your changes.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>How do I contact the NearHelp team?</summary>
+            <p>
+              Use the email address in the contact section below.
+            </p>
+          </details>
+        </div>
+      </section>
+
+      <section
+        id="contact"
+        class="contact-section"
+        aria-labelledby="contact-heading"
+      >
+        <div class="contact-panel">
+          <div>
+            <p class="eyebrow">Contact</p>
+            <h2 id="contact-heading">Have a question or suggestion?</h2>
+            <p>
+              For project questions or website feedback, email the NearHelp
+              team.
+            </p>
+          </div>
+          <a href="mailto:kabeerhusain765@gmail.com">
+            kabeerhusain765@gmail.com
+          </a>
+        </div>
+      </section>
+
+      <section
+        id="site-directory"
+        class="directory-section"
+        aria-labelledby="directory-heading"
+      >
+        <div class="section-heading">
+          <p class="eyebrow">NearHelp directory</p>
+          <h2 id="directory-heading">Explore the website</h2>
+          <p>Open a page or feature using the links below.</p>
+        </div>
+
+        <div class="directory-grid">
+          <article class="directory-card">
+            <h3>Nearby search</h3>
+            <p>Search map data around your current location.</p>
+            <a href="#nearby-search">Open nearby search</a>
+          </article>
+
+          <article class="directory-card">
+            <h3>Emergency information</h3>
+            <p>Read important information for urgent situations.</p>
+            <a href="#emergency">Read emergency information</a>
+          </article>
+
+          <article class="directory-card">
+            <h3>Suggest a place</h3>
+            <p>Submit a missing place for administrator review.</p>
+            <a href="/add-place.html">Open place suggestion</a>
+          </article>
+
+          <article class="directory-card">
+            <h3>Login</h3>
+            <p>Sign in to your NearHelp account.</p>
+            <a href="/login.html">Open login</a>
+          </article>
+
+          <article class="directory-card">
+            <h3>Sign up</h3>
+            <p>Create an account to access member features.</p>
+            <a href="/signup.html">Create an account</a>
+          </article>
+
+          <article class="directory-card">
+            <h3>Profile</h3>
+            <p>View or update your account details.</p>
+            <a href="/profile.html">Open profile</a>
+          </article>
+
+          <article class="directory-card">
+            <h3>Chat</h3>
+            <p>Open your NearHelp conversations.</p>
+            <a href="/chat.html">Open chat</a>
+          </article>
+
+          <article class="directory-card">
+            <h3>Frequently asked questions</h3>
+            <p>Find answers to common questions.</p>
+            <a href="#faq">Read the FAQs</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="closing-section" aria-labelledby="closing-heading">
+        <div class="closing-panel">
+          <p class="eyebrow">NearHelp</p>
+          <h2 id="closing-heading">
+            Useful local information, in one place
+          </h2>
+          <p>
+            Search available map data, review place details, or suggest a
+            useful location for the community.
+          </p>
+          <a class="button-link" href="#nearby-search">
+            Start a nearby search
+          </a>
+        </div>
+      </section>
+    </main>
+          <section
+        id="ai-assistant"
+        class="assistant-section"
+        aria-labelledby="assistant-heading"
+      >
+        <div class="section-heading">
+          <p class="eyebrow">NearHelp assistant</p>
+          <h2 id="assistant-heading">Ask for local guidance</h2>
+          <p>Write a question and the assistant will try to help.</p>
+        </div>
+
+        <div class="search-panel assistant-panel">
+          <form id="assistant-form">
+            <label for="assistant-question">Your question</label>
+            <textarea
+              id="assistant-question"
+              name="question"
+              rows="4"
+              maxlength="2000"
+              placeholder="For example: How can I find a nearby hospital?"
+              required
+            ></textarea>
+
+            <button type="submit">Ask the assistant</button>
+            <p
+              id="assistant-status"
+              role="status"
+              aria-live="polite"
+            ></p>
+          </form>
+        </div>
+      </section>
+
+    <footer class="site-footer">
+      <div class="footer-main">
+        <a class="brand" href="/" aria-label="NearHelp home">
+          <img src="/assets/logo.svg" alt="" width="36" height="36" />
+          <span>NearHelp</span>
+        </a>
+
+        <script type="module" src="/js/search.js"></script>
+        <script type="module" src="/js/assistant.js"></script>
+        <p>
+          Find useful places around you and help your community share local
+          information.
+        </p>
+
+        <nav aria-label="Footer navigation">
+          <a href="#explore">Explore</a>
+          <a href="#how-it-works">How it works</a>
+          <a href="#emergency">Emergency information</a>
+          <a href="/add-place.html">Suggest a place</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <p>
+          Contact:
+          <a href="mailto:kabeerhusain765@gmail.com">
+            kabeerhusain765@gmail.com
+          </a>
+        </p>
+      </div>
+
+      <div class="footer-bottom">
+        <p>
+          &copy; <span id="current-year"></span> NearHelp. Place information
+          may be incomplete or out of date.
+        </p>
+        <a href="#top">Back to top</a>
+      </div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="/js/map.js"></script>
+    <script type="module" src="/js/search.js"></script>
+    <script type="module" src="/js/emergency.js"></script>
+
+    <script>
+      document.querySelector("#current-year").textContent =
+        new Date().getFullYear();
+    </script>
+  </body>
+</html>

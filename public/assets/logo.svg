@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">NearHelp</title>
+  <defs>
+    <linearGradient id="nhg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2cbc9f"/>
+      <stop offset="1" stop-color="#0f8573"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="18" fill="url(#nhg)"/>
+  <path d="M32 9.5c-8.84 0-16 7.16-16 16 0 12 16 30 16 30s16-18 16-30c0-8.84-7.16-16-16-16Z" fill="#fff"/>
+  <g fill="url(#nhg)">
+    <rect x="27.5" y="23" width="9" height="3.4" rx="1.7"/>
+    <rect x="30.3" y="20.2" width="3.4" height="9" rx="1.7"/>
+  </g>
+</svg>

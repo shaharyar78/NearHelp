@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="NearHelp account banayein." />
+    <title>Sign up — NearHelp</title>
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/signup.css" />
+    <script type="module" src="/js/auth.js"></script>
+  </head>
+
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="NearHelp home">
+        <img src="/assets/logo.svg" alt="" width="36" height="36" />
+        <span>NearHelp</span>
+      </a>
+
+      <nav aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/login.html">Login</a>
+      </nav>
+    </header>
+
+    <main class="container auth-container">
+      <section class="auth-card" aria-labelledby="signup-heading">
+        <p class="eyebrow">Get started</p>
+        <h1 id="signup-heading">Sign up</h1>
+        <p>Create your NearHelp account.</p>
+
+        <form id="signup-form">
+          <label for="name">Full name</label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            autocomplete="name"
+            minlength="2"
+            maxlength="80"
+            required
+          />
+
+          <label for="email">Email</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            autocomplete="email"
+            maxlength="254"
+            required
+          />
+
+          <label for="password">Password</label>
+          <div class="password-field">
+            <input
+              id="password"
+              name="password"
+              type="password"
+              autocomplete="new-password"
+              minlength="8"
+            maxlength="72"
+              required
+            />
+            <button
+              id="toggle-password"
+              class="password-toggle"
+              type="button"
+              aria-controls="password"
+              aria-pressed="false"
+            >
+              Show
+            </button>
+          </div>
+
+          <button class="button button-primary button-block" type="submit">Create account</button>
+          <p id="form-status" role="status" aria-live="polite"></p>
+        </form>
+
+        <p>
+          Already have an account?
+          <a href="/login.html">Sign in</a>
+        </p>
+      </section>
+    </main>
+  </body>
+</html>

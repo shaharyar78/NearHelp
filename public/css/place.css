@@ -1,0 +1,57 @@
+/* Place details page — NearHelp */
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 10% 20%, rgb(132 229 192 / 34%), transparent 36%),
+    radial-gradient(ellipse at 90% 25%, rgb(165 165 255 / 30%), transparent 34%),
+    linear-gradient(135deg, #effaf5, #f3f1ff 58%, #fff5ee);
+}
+
+.place-card {
+  background: rgb(255 255 255 / 80%);
+  backdrop-filter: blur(18px) saturate(150%);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+}
+
+.place-card h1,
+.place-card h2 {
+  margin-bottom: 16px;
+}
+
+#place-content {
+  display: grid;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.place-detail-row {
+  grid-template-columns: 120px 1fr;
+}
+
+.place-detail-row > span {
+  color: var(--ink-soft);
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+.place-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+@media (max-width: 520px) {
+  .place-container {
+    width: min(100% - 28px, 720px);
+    padding-block: 26px;
+  }
+
+  .place-detail-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="NearHelp admin dashboard." />
+    <title>Admin dashboard — NearHelp</title>
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/admin.css" />
+    <script type="module" src="/js/admin.js"></script>
+  </head>
+
+  <body class="admin-page">
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="NearHelp home">
+        <img src="/assets/logo.svg" alt="" width="36" height="36" />
+        <span>NearHelp</span>
+      </a>
+
+      <nav aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/profile.html">Profile</a>
+        <button id="logout-button" type="button">Logout</button>
+      </nav>
+    </header>
+
+    <main class="container admin-container">
+      <section class="admin-heading">
+        <p class="eyebrow">Administration</p>
+        <h1>Admin dashboard</h1>
+        <p>Manage users and review community-submitted places.</p>
+      </section>
+
+      <p id="admin-status" class="admin-status" role="status" aria-live="polite">
+        Loading dashboard…
+      </p>
+
+      <section class="admin-panel" aria-labelledby="summary-heading">
+        <h2 id="summary-heading">Summary</h2>
+        <div class="admin-stats">
+          <div class="stat-card">
+            <span class="stat-label">Total users</span>
+            <span class="stat-value" id="user-count">—</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Pending place submissions</span>
+            <span class="stat-value" id="pending-place-count">—</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="admin-panel" aria-labelledby="users-heading">
+        <h2 id="users-heading">Users</h2>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Role</th>
+                <th scope="col">Update role</th>
+              </tr>
+            </thead>
+            <tbody id="users-table-body"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="admin-panel" aria-labelledby="community-places-heading">
+        <h2 id="community-places-heading">Place submissions</h2>
+        <p>Review places submitted by NearHelp users.</p>
+
+        <p
+          id="community-places-status"
+          class="admin-status"
+          role="status"
+          aria-live="polite"
+        >
+          Loading place submissions…
+        </p>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Category</th>
+                <th scope="col">Address</th>
+                <th scope="col">Location</th>
+                <th scope="col">Review</th>
+              </tr>
+            </thead>
+            <tbody id="community-places-table-body"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

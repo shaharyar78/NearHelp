@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Suggest a missing place to the NearHelp community."
+    />
+    <title>Suggest a place — NearHelp</title>
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/add-place.css" />
+    <script type="module" src="/js/add-place.js"></script>
+  </head>
+
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="NearHelp home">
+        <img src="/assets/logo.svg" alt="" width="36" height="36" />
+        <span>NearHelp</span>
+      </a>
+
+      <nav aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/profile.html">Profile</a>
+        <button id="logout-button" type="button">Logout</button>
+      </nav>
+    </header>
+
+    <main class="container">
+      <section class="auth-card" aria-labelledby="add-place-heading">
+        <p class="eyebrow">Community contribution</p>
+        <h1 id="add-place-heading">Suggest a missing place</h1>
+        <p>
+          Share accurate details. Approved places will appear in search results.
+        </p>
+
+        <form id="add-place-form">
+          <label for="place-name">Place name</label>
+          <input
+            id="place-name"
+            name="name"
+            type="text"
+            maxlength="120"
+            required
+          />
+
+          <label for="place-category">Category</label>
+          <select id="place-category" name="category" required>
+            <option value="">Choose a category</option>
+            <option value="hospital">Hospital / clinic</option>
+            <option value="pharmacy">Pharmacy</option>
+            <option value="police">Police station</option>
+            <option value="fire_station">Fire station</option>
+            <option value="shelter">Shelter</option>
+            <option value="food">Food</option>
+            <option value="shop">Shop</option>
+            <option value="bank">Bank</option>
+            <option value="atm">ATM</option>
+            <option value="bus_station">Bus station</option>
+            <option value="train_station">Train station</option>
+            <option value="parking">Parking</option>
+            <option value="library">Library</option>
+            <option value="school">School</option>
+            <option value="college">College</option>
+            <option value="court">Court</option>
+            <option value="other">Other</option>
+          </select>
+
+          <label for="place-address">Address or area</label>
+          <input
+            id="place-address"
+            name="address"
+            type="text"
+            maxlength="200"
+            required
+          />
+
+          <button id="get-location-button" class="button button-secondary" type="button">
+            Use my current location
+          </button>
+
+          <label for="place-lat">Latitude</label>
+          <input
+            id="place-lat"
+            name="lat"
+            type="number"
+            step="any"
+            required
+          />
+
+          <label for="place-lon">Longitude</label>
+          <input
+            id="place-lon"
+            name="lon"
+            type="number"
+            step="any"
+            required
+          />
+
+          <button class="button button-primary button-block" type="submit">Submit for review</button>
+          <p id="add-place-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>
