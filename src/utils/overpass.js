@@ -83,7 +83,7 @@ export async function searchNearbyPlaces(
   }
 
   const { lat, lon: longitude } = options;
-  const searchRadius = Math.min(Math.max(options.radius || 5000, 100),100_000);
+  const searchRadius = Math.min(Math.max(options.radius || 5000, 100), 50_000);
   const normalizedCategory = String(options.category || "").trim().toLowerCase();
 
   if (

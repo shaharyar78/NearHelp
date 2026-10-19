@@ -124,7 +124,7 @@ form?.addEventListener("submit", async (event) => {
       const params = new URLSearchParams({
         lat: String(latitude),
         lon: String(longitude),
-        radius: radiusSelect?.value || "20000",
+        radius: radiusSelect?.value || "5000",
       });
 
       if (categorySelect?.value) {
