@@ -1,0 +1,5 @@
+package com.nearhelp.app;
+
+import com.getcapacitor.BridgeActivity;
+
+public class MainActivity extends BridgeActivity {}
