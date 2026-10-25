@@ -2440,6 +2440,33 @@ body.home-page {
     box-shadow: none;
   }
 }
+
+/* Keep the home screen responsive in Android WebView on lower powered phones. */
+@media (max-width: 760px) and (pointer: coarse) {
+  .home-page *,
+  .home-page *::before,
+  .home-page *::after {
+    animation: none !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  .home-page .hero-map-card,
+  .home-page .floating-information-card,
+  .home-page .category-card,
+  .home-page .account-card,
+  .home-page .safety-card,
+  .home-page .accessibility-card,
+  .home-page .directory-card,
+  .home-page .note-card,
+  .home-page .step-card {
+    transform: none !important;
+    transform-style: flat;
+    backface-visibility: visible;
+  }
+}
 .home-page .assistant-panel {
   width: min(820px, 100%);
   margin-inline: auto;

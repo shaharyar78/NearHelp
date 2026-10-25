@@ -1,5 +1,8 @@
 const TOKEN_KEY = "nearhelp_token";
 const USER_KEY = "nearhelp_user";
+const API_ORIGIN = window.Capacitor?.Plugins?.Geolocation
+  ? "https://near-by-help-1.onrender.com"
+  : window.location.origin;
 
 export function getToken() {
   return localStorage.getItem(TOKEN_KEY);
@@ -47,7 +50,7 @@ export async function apiRequest(path, options = {}) {
     headers.set("Content-Type", "application/json");
   }
 
-  const response = await fetch(path, {
+  const response = await fetch(new URL(path, API_ORIGIN), {
     ...options,
     headers,
   });

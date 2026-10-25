@@ -1,5 +1,6 @@
 import "dotenv/config";
 import express from "express";
+import cors from "cors";
 import rateLimit from "express-rate-limit";
 
 import config from "./src/config.js";
@@ -11,6 +12,28 @@ import assistantRoutes from "./src/routes/assistant.routes.js";
 import { errorHandler, notFoundHandler } from "./src/middleware/error.middleware.js";
 
 const app = express();
+
+const capacitorOrigins = new Set([
+  "https://localhost",
+  "capacitor://localhost",
+  "https://near-by-help-1.onrender.com",
+  "http://localhost:3000",
+  "http://127.0.0.1:3000",
+]);
+
+app.use(cors({
+  origin(origin, callback) {
+    if (!origin || capacitorOrigins.has(origin)) {
+      callback(null, true);
+      return;
+    }
+
+    callback(new Error("Origin is not allowed by CORS."));
+  },
+  methods: ["GET", "POST", "PATCH", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  maxAge: 86400,
+}));
 
 app.disable("x-powered-by");
 app.use((req, res, next) => {

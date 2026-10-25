@@ -93,6 +93,41 @@ function preselectCategory(value) {
   if (option) categorySelect.value = value;
 }
 
+async function getCurrentLocation() {
+  const nativeGeolocation = window.Capacitor?.Plugins?.Geolocation;
+
+  if (nativeGeolocation) {
+    let permissions = await nativeGeolocation.checkPermissions();
+    if (permissions.location !== "granted" && permissions.coarseLocation !== "granted") {
+      permissions = await nativeGeolocation.requestPermissions();
+    }
+
+    if (permissions.location !== "granted" && permissions.coarseLocation !== "granted") {
+      const permissionError = new Error("Location permission was not granted.");
+      permissionError.code = 1;
+      throw permissionError;
+    }
+
+    return nativeGeolocation.getCurrentPosition({
+      enableHighAccuracy: false,
+      maximumAge: 30_000,
+      timeout: 25_000,
+    });
+  }
+
+  if (!navigator.geolocation) {
+    throw new Error("Location is not supported by this browser.");
+  }
+
+  return new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(resolve, reject, {
+      enableHighAccuracy: false,
+      maximumAge: 30_000,
+      timeout: 25_000,
+    });
+  });
+}
+
 // Preselect a category from the URL (?category=hospital) on load.
 preselectCategory(new URLSearchParams(window.location.search).get("category"));
 
@@ -106,53 +141,45 @@ document.querySelectorAll("[data-category]").forEach((card) => {
 form?.addEventListener("submit", async (event) => {
   event.preventDefault();
 
-  if (!navigator.geolocation) {
-    showStatus("Location is not supported by this browser.", true);
-    return;
-  }
-
   showStatus("Getting your location…");
   results?.replaceChildren();
 
-  navigator.geolocation.getCurrentPosition(
-    async ({ coords }) => {
-      const { latitude, longitude } = coords;
+  try {
+    const { coords } = await getCurrentLocation();
+    const { latitude, longitude } = coords;
 
-      showUserLocation(latitude, longitude);
-      showStatus("Searching nearby places…");
+    showUserLocation(latitude, longitude);
+    showStatus("Searching nearby places…");
 
-      const params = new URLSearchParams({
-        lat: String(latitude),
-        lon: String(longitude),
-        radius: radiusSelect?.value || "5000",
-      });
+    const params = new URLSearchParams({
+      lat: String(latitude),
+      lon: String(longitude),
+      radius: radiusSelect?.value || "5000",
+    });
 
-      if (categorySelect?.value) {
-        params.set("category", categorySelect.value);
-      }
+    if (categorySelect?.value) {
+      params.set("category", categorySelect.value);
+    }
 
-      try {
-        const data = await apiGet(`/api/places?${params}`);
-        const places = Array.isArray(data.places) ? data.places : [];
+    const data = await apiGet(`/api/places?${params}`);
+    const places = Array.isArray(data.places) ? data.places : [];
 
-        showPlaces(places);
-        renderPlaces(places, latitude, longitude);
+    showPlaces(places);
+    renderPlaces(places, latitude, longitude);
 
-        showStatus(
-          places.length
-            ? `${places.length} place${places.length === 1 ? "" : "s"} found.`
-            : "No places found in this area."
-        );
-      } catch (error) {
-        showStatus(error.message || "Could not load nearby places.", true);
-      }
-    },
-    () => {
-      showStatus(
-        "Could not get your location. Check your browser permissions.",
-        true
-      );
-    },
-    { enableHighAccuracy: true, timeout: 10000 }
-  );
+    showStatus(
+      places.length
+        ? `${places.length} place${places.length === 1 ? "" : "s"} found.`
+        : "No places found in this area."
+    );
+  } catch (error) {
+    const message = error?.code === 1 || /permission/i.test(error?.message || "")
+      ? "Location permission is off. Allow NearHelp to access location in your phone settings, then try again."
+      : error?.code === 2 || /location services|location is disabled/i.test(error?.message || "")
+        ? "Your phone could not determine its location. Turn on Location and try again."
+        : error?.code === 3 || /timeout/i.test(error?.message || "")
+          ? "Location is taking too long. Turn on Location and try again."
+          : error?.message || "Could not load nearby places.";
+    showStatus(message, true);
+  }
 });
