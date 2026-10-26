@@ -1,6 +1,10 @@
 const TOKEN_KEY = "nearhelp_token";
 const USER_KEY = "nearhelp_user";
-const API_ORIGIN = window.Capacitor?.Plugins?.Geolocation
+const isNativeApp =
+  window.Capacitor?.isNativePlatform?.() === true ||
+  ["android", "ios"].includes(window.Capacitor?.getPlatform?.());
+
+const API_ORIGIN = isNativeApp
   ? "https://near-by-help-1.onrender.com"
   : window.location.origin;
 
