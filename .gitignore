@@ -2,6 +2,11 @@ node_modules/
 .env
 npm-debug.log*
 android/.idea/
+
+# Keep Android release signing credentials local and out of GitHub.
+android/keystore.properties
+android/app/nearhelp-release-key.jks
+NearHelp-release.apk
 android/.idea/
 
 android/.idea/

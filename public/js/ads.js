@@ -1,11 +1,12 @@
 const APP_OPEN_AD_ID = "ca-app-pub-4282282216399668/7333540931";
 const BANNER_AD_ID = "ca-app-pub-4282282216399668/3926532981";
-const FIRST_LAUNCH_KEY = "nearhelp_has_opened_before";
 const APP_OPEN_SHOWN_KEY = "nearhelp_app_open_shown";
 const BANNER_STARTED_KEY = "nearhelp_banner_started";
 const ADS_SETUP_STARTED_KEY = "nearhelp_admob_setup_started";
+const BANNER_HEIGHT_KEY = "nearhelp_banner_height";
+let bannerListenerAttached = false;
 const capacitor = window.Capacitor;
-const AdMob = capacitor?.registerPlugin?.("AdMob");
+const AdMob = capacitor?.Plugins?.AdMob;
 
 if (capacitor?.isNativePlatform?.() && AdMob) {
   void attachBannerSizeListener();
@@ -22,24 +23,29 @@ if (capacitor?.isNativePlatform?.() && AdMob) {
   }
 }
 
-let bannerListenerAttached = false;
-
 async function attachBannerSizeListener() {
   if (bannerListenerAttached) return;
   bannerListenerAttached = true;
 
   try {
     await AdMob.addListener("bannerAdSizeChanged", ({ height }) => {
-      document.body.style.paddingBottom = height > 0 ? `${height}px` : "";
+      const bannerHeight = Math.max(0, Number(height) || 0);
+      sessionStorage.setItem(BANNER_HEIGHT_KEY, String(bannerHeight));
+      document.body.style.paddingBottom = bannerHeight > 0 ? `${bannerHeight}px` : "";
     });
 
     if (sessionStorage.getItem(BANNER_STARTED_KEY) === "true") {
-      document.body.style.paddingBottom = "64px";
+      const bannerHeight = Number(sessionStorage.getItem(BANNER_HEIGHT_KEY)) || 0;
+      document.body.style.paddingBottom = bannerHeight > 0 ? `${bannerHeight}px` : "";
     }
   } catch (error) {
     bannerListenerAttached = false;
     console.warn("NearHelp banner size listener could not be added.", error);
   }
+}
+
+if (capacitor?.isNativePlatform?.() && !AdMob) {
+  console.error("NearHelp AdMob plugin is not registered in this APK. Sync and rebuild the Android project.");
 }
 
 async function startBanner() {
@@ -60,8 +66,6 @@ async function startBanner() {
 }
 
 async function startAds() {
-  const isFirstLaunch = localStorage.getItem(FIRST_LAUNCH_KEY) !== "true";
-  localStorage.setItem(FIRST_LAUNCH_KEY, "true");
   let canRequestAds = false;
 
   try {
@@ -78,10 +82,7 @@ async function startAds() {
 
     await AdMob.initialize();
 
-    if (
-      !isFirstLaunch &&
-      sessionStorage.getItem(APP_OPEN_SHOWN_KEY) !== "true"
-    ) {
+    if (sessionStorage.getItem(APP_OPEN_SHOWN_KEY) !== "true") {
       await AdMob.addListener("appOpenAdClosed", () => {
         void startBanner();
       });
