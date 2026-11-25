@@ -1,115 +1,77 @@
-# NearHelp
+# 📍 NearHelp
 
-**Find the help you need, right around you.**
+> **Find the help you need, right around you.**
+
+[![Live Demo](https://img.shields.io/badge/Live-Web_App-blue?style=flat-square)](https://near-by-help-1.onrender.com)
+[![Download APK](https://img.shields.io/badge/Download-Android_APK-green?style=flat-square&logo=android)](https://github.com/shaharyar78/NearHelp/releases/tag/1.0)
+[![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white)](https://nodejs.org)
+[![Express.js](https://img.shields.io/badge/Express.js-000000?style=flat-square&logo=express&logoColor=white)](https://expressjs.com)
+[![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=flat-square&logo=supabase&logoColor=white)](https://supabase.com)
+[![Render](https://img.shields.io/badge/Hosted_on-Render-46E3B7?style=flat-square&logo=render&logoColor=white)](https://render.com)
 
 NearHelp helps people explore useful nearby places, view available results on a map, and suggest missing community locations for review.
 
-## Features
+**🔗 Live Web App:** [near-by-help-1.onrender.com](https://near-by-help-1.onrender.com)  
+**📱 Android App:** [Download APK](https://github.com/shaharyar78/NearHelp/releases/tag/1.0) *(Built with Capacitor)*
 
-- Search nearby places by category
-- View results on an interactive map
-- Open place details
-- Ask the NearHelp AI assistant
-- Create an account and manage a profile
-- Chat with other registered members
-- Submit places for administrator review
+---
 
-Place availability depends on geographic map data, which may be incomplete or out of date.
+## 📸 App Preview
 
-## Built with
+> *(Add a screenshot of the map or AI chat here)*
 
-- Node.js and Express
-- HTML, CSS, and JavaScript
-- Supabase
-- Geoapify Places API
-- Leaflet and OpenStreetMap
-- OpenRouter AI API
+<p align="center">
+  <img src="screenshots/nearhelp-preview.png" alt="NearHelp App Preview" width="300">
+</p>
 
-## Run locally
+---
 
-Install dependencies from the project folder:
+## ✨ Features
 
-```bash
-npm install
-```
+- 🔍 **Search nearby places** by category
+- 🗺️ **Interactive map** (Leaflet & OpenStreetMap)
+- 📍 **View place details**
+- 🤖 **AI Assistant** to ask questions (Powered by OpenRouter)
+- 👤 **User accounts** (Sign up, login, manage profile)
+- 💬 **Real-time Chat** with other registered members
+- ➕ **Suggest a place** for admin review
+- 🛡️ **Admin dashboard** for managing places and users
 
-Create a `.env` file in the project root and add your own configuration:
+*Note: Place availability depends on geographic map data, which may be incomplete or out of date.*
 
-```env
-PORT=3000
-NODE_ENV=development
+---
 
-SUPABASE_URL=https://your-project-id.supabase.co
-SUPABASE_ANON_KEY=your-publishable-key
-SUPABASE_SERVICE_ROLE_KEY=your-server-secret-key
+## 🛠️ Built With
 
-JWT_SECRET=replace-with-a-long-random-secret
-JWT_EXPIRES_IN=7d
-
-GEOAPIFY_API_KEY=your-geoapify-api-key
-
-OPENROUTER_API_KEY=your-openrouter-api-key
-OPENROUTER_MODEL=openai/gpt-4o-mini
-```
-
-Use your real values only in `.env`. Keep `.env.example` limited to placeholders, and never commit secret keys to GitHub.
-
-If your project has SQL setup files, run `sql/schema.sql` and then `sql/policies.sql` in the Supabase SQL Editor.
-
-Start the development server:
-
-```bash
-npm run dev
-```
-
-Then open [http://localhost:3000](http://localhost:3000).
-
-On Windows PowerShell, use `npm.cmd` if PowerShell blocks the `npm` script:
-
-```powershell
-npm.cmd install
-npm.cmd run dev
-```
-
-## Main pages
-
-| Page | Path |
+| Layer | Technology |
 |---|---|
-| Home and nearby search | `/` |
-| Login | `/login.html` |
-| Sign up | `/signup.html` |
-| Profile | `/profile.html` |
-| Chat | `/chat.html` |
-| Place details | `/place.html` |
-| Suggest a place | `/add-place.html` |
-| Admin dashboard | `/admin.html` |
+| **Backend** | Node.js · Express |
+| **Frontend** | HTML · CSS · JavaScript |
+| **Database & Auth** | Supabase (PostgreSQL) |
+| **Maps** | Leaflet · OpenStreetMap |
+| **Places Data** | Geoapify Places API |
+| **AI Assistant** | OpenRouter API |
+| **Mobile App** | Capacitor · Android Studio (APK) |
+| **Hosting** | Render |
 
-Some features require an account. Place review and user administration require an admin account.
+---
 
-## Project structure
+## 📁 Project Structure
 
 ```text
 nearhelp/
 ├── server.js
 ├── src/
-│   ├── routes/
-│   ├── controllers/
-│   ├── middleware/
-│   ├── utils/
-│   └── db/
+│   ├── routes/          # Express API routes
+│   ├── controllers/     # Route logic
+│   ├── middleware/      # Auth & validation
+│   ├── utils/           # Helper functions
+│   └── db/              # Database connections
 ├── public/
-│   ├── *.html
+│   ├── *.html           # Frontend pages
 │   ├── css/
 │   ├── js/
 │   └── assets/
-├── sql/
+├── android/             # Capacitor Android project
+├── sql/                 # Supabase SQL setup files
 └── docs/
-```
-
-## Deployment
-
-Deploy the Node.js app as a web service. Set environment variables in the hosting provider’s dashboard and make sure the server listens on `process.env.PORT`. Do not upload `.env` or put private API keys in frontend files.
-
-## Contact
-
-**kabeerhusain765@gmail.com**
